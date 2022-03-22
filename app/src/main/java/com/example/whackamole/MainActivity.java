@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         makeStatusBarTransparent();
+        ImageView imageView = findViewById(R.id.imageView);
+        Glide.with(this).load(R.drawable.background_water).into(imageView);
     }
 
     public void makeStatusBarTransparent() {
