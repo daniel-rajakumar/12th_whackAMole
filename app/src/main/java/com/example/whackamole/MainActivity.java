@@ -11,15 +11,20 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {
+    GlobalVariables globalVariables;
+
+    void run(){
+        globalVariables = (GlobalVariables) this.getApplication();
+        globalVariables.setValues(this);
+        makeStatusBarTransparent();
+        Glide.with(this).load(R.drawable.background_water).into(globalVariables.getImageView_background());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        makeStatusBarTransparent();
-        ImageView imageView = findViewById(R.id.imageView_background);
-        Glide.with(this).load(R.drawable.background_water).into(imageView);
+        run();
     }
 
     public void makeStatusBarTransparent() {
