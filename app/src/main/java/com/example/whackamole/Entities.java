@@ -49,6 +49,17 @@ public class Entities {
 
         button.setAlpha(objectFloatingDepth);
 
+
+        AnimationSet animationSet1 = new AnimationSet(false);
+        TranslateAnimation translateAnimation = new TranslateAnimation(random(-15, -5), random(5, 15), 0f, 0f);
+        translateAnimation.setDuration(1000);
+        translateAnimation.setRepeatCount(Animation.INFINITE);
+        translateAnimation.setRepeatMode(Animation.REVERSE);
+//        animationSet1.addAnimation(translateAnimation);
+        button.startAnimation(translateAnimation);
+
+
+
         button.setOnClickListener(e -> {
             button.setAlpha(1f);
 //            Toast.makeText(GlobalVariables.mainActivity, String.format("(%s)", e.getAlpha()), Toast.LENGTH_LONG).show();
