@@ -13,19 +13,10 @@ import android.widget.Button;
 import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
     GlobalVariables globalVariables;
-
-    enum guideline_spawnArea {
-        TOP(R.id.guideline_spawnArea_top),
-        BOTTOM(R.id.guideline_spawnArea_bottom),
-        LEFT(R.id.guideline_spawnArea_left),
-        RIGHT(R.id.guideline_spawnArea_right);
-
-        final int id;
-        guideline_spawnArea(int id){ this.id = id; }
-    }
 
 
     void run(){
