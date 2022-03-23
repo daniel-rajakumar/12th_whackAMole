@@ -108,6 +108,7 @@ public class Entities {
                 public void onAnimationEnd(Animation animation) {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         GlobalVariables.constraintLayout.removeView(e);
+                        button.setImageResource(R.drawable.plastic);
 
                         new java.util.Timer().schedule(
                                 new java.util.TimerTask() {
