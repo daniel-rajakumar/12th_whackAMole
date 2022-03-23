@@ -42,6 +42,31 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_fishermen_top"
         app:srcCompat="@drawable/fisher" />
 
+    <Button
+        android:id="@+id/button_client"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:text="Server"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_platform_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_fishermen_right"
+        app:layout_constraintTop_toTopOf="@+id/guideline_platform_bottom" />
+
+    <Button
+        android:id="@+id/button_server"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="8dp"
+        android:text="Client"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_fishermen_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_platform_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_platform_bottom" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_platform_left"
         android:layout_width="wrap_content"
@@ -69,14 +94,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93" />
+        app:layout_constraintGuide_percent="0.86" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_fishermen_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.71" />
+        app:layout_constraintGuide_percent="0.74" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_fishermen_top"

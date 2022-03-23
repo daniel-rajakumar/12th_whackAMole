@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
                 new Entities(x, y);
             }
         }
+
+        new Server();
+        new Client();
     }
 
     @Override
