@@ -141,7 +141,8 @@ public class Entities {
 
                                         });
                                     }
-                                },2000);
+
+                                }, random(500, 3000));
                     });
                 }
 
@@ -215,6 +216,6 @@ public class Entities {
 
 
     public int random(int from, int to){
-        return (int)(Math.random() * (from - to + 1)) + from;
+        return (int)(Math.random() * (to - from + 1)) + from;
     }
 }
