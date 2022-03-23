@@ -31,7 +31,7 @@ enum guideline_spawnArea {
 
 public class Entities {
     static float gridSize;
-    float objectFloatingDepth = 0.66f;
+    float objectFloatingDepth = 0.60f;
 
     Entities(int x, int y){
 //        guideline_spawnArea.top = findViewById(R.id.guideline_spawnArea_top);
@@ -52,15 +52,12 @@ public class Entities {
         button.setOnClickListener(e -> {
             button.setAlpha(1f);
 //            Toast.makeText(GlobalVariables.mainActivity, String.format("(%s)", e.getAlpha()), Toast.LENGTH_LONG).show();
-            final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, 0f, 0f, -90f);
-            final AlphaAnimation alphaAnimation = new AlphaAnimation(objectFloatingDepth, 1f);
-            final RotateAnimation rotateAnimation = new RotateAnimation(0.0f, -45f);
-
             AnimationSet animationSet = new AnimationSet(false);
             animationSet.setDuration(1000);
-            animationSet.addAnimation(translateAnimation1);
-            animationSet.addAnimation(alphaAnimation);
-//            animationSet.addAnimation(rotateAnimation);
+            animationSet.addAnimation(new TranslateAnimation(0f, 0f, 0f, -90f));
+            animationSet.addAnimation(new AlphaAnimation(objectFloatingDepth, 1f));
+            animationSet.addAnimation(new RotateAnimation(0.0f, -20f,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f));
             button.startAnimation(animationSet);
 
 
