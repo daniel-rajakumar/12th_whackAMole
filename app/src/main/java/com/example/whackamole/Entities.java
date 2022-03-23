@@ -1,9 +1,20 @@
 package com.example.whackamole;
 
+import android.app.Activity;
+import android.content.Context;
 import android.media.Image;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -25,12 +36,59 @@ public class Entities {
 //        guideline_spawnArea.top = findViewById(R.id.guideline_spawnArea_top);
         ImageView button = new ImageView(GlobalVariables.mainActivity);
         button.setId(View.generateViewId());
+//        button.setRotationX(random(0, 360));
+//        button.setRotationY(random(0, 360));
+        button.setRotation(-45);
+//        button.setRotationX(45f);
+//        button.setRotationY(45f);
 //        button.setText(String.format("(%s, %s)", x, y));
         button.setImageResource(R.drawable.nemo);
+//        button.setAlpha(0.4f);
 //        button.setScaleType(ImageView.ScaleType.FIT_XY);
 
+        button.setAlpha(0.5f);
+
         button.setOnClickListener(e -> {
+//            Toast.makeText(GlobalVariables.mainActivity, String.format("(%s)", e.getAlpha()), Toast.LENGTH_LONG).show();
+            final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, -90f, 0f, 90f);
+            final AlphaAnimation alphaAnimation = new AlphaAnimation(0.9f, 1f);
+            final RotateAnimation rotateAnimation = new RotateAnimation(0.0f, -45f);
+
+            AnimationSet animationSet = new AnimationSet(false);
+            animationSet.setDuration(5000);
+//            animationSet.addAnimation(translateAnimation1);
+            animationSet.addAnimation(alphaAnimation);
+//            animationSet.addAnimation(rotateAnimation);
+            button.startAnimation(animationSet);
+
+
+
+
+//            translateAnimation1.setAnimationListener(new Animation.AnimationListener() {
+//                @Override
+//                public void onAnimationStart(Animation animation) {
+//                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) button.getLayoutParams();
+////                    params.topMargin -= 30f;
+//                    params.leftMargin -= 0;
+//                    button.setLayoutParams(params);
+//                }
+//
+//                @Override
+//                public void onAnimationEnd(Animation animation) {
+//
+//                }
+//
+//                @Override
+//                public void onAnimationRepeat(Animation animation) {
+//                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) button.getLayoutParams();
+////                    params.topMargin -= 0.001f;
+////                    params.leftMargin -= 0;
+//                    button.setLayoutParams(params);
+//                }
+//            });
+
             GlobalVariables.constraintLayout.removeView(e);
+
 
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
@@ -38,16 +96,23 @@ public class Entities {
                         public void run() {
                             // your code here
                             GlobalVariables.mainActivity.runOnUiThread(() -> {
-                                GlobalVariables.constraintLayout.addView(e);
+//                                e.startAnimation(translateAnimation1);
+//                                final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, 0f, 40f, -0f);
+//                                translateAnimation1.setDuration(200);
+//                                GlobalVariables.constraintLayout.addView(e);
+////                                e.setRotation(-45f);
+////                                button.setRotation(-45);
+//                                e.startAnimation(translateAnimation1);
                             });
                         }
                     },
-                    5000
+                    4000
             );
         });
 
         ConstraintSet constraintSet = new ConstraintSet();
 //        ConstraintLayout viewGroup = findViewById(R.id.mainLayout);
+
         GlobalVariables.constraintLayout.addView(button);
 
         constraintSet.clone(GlobalVariables.constraintLayout);
@@ -70,9 +135,8 @@ public class Entities {
 
 
 
-        button.requestLayout();
-        button.getLayoutParams().height = 300;
-        button.getLayoutParams().width = 300;
+        button.getLayoutParams().height = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15);
+        button.getLayoutParams().width = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15); ;
 
 
 //        new Thread(() -> {
@@ -85,5 +149,16 @@ public class Entities {
 //        }).start();
 
 
+    }
+
+    public static int getScreenWidth(Context context) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+
+
+    public int random(int from, int to){
+        return (int)(Math.random() * (from - to + 1)) + from;
     }
 }
