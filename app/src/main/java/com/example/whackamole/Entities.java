@@ -31,6 +31,7 @@ enum guideline_spawnArea {
 
 public class Entities {
     static float gridSize;
+    float objectFloatingDepth = 0.66f;
 
     Entities(int x, int y){
 //        guideline_spawnArea.top = findViewById(R.id.guideline_spawnArea_top);
@@ -46,17 +47,18 @@ public class Entities {
 //        button.setAlpha(0.4f);
 //        button.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        button.setAlpha(0.5f);
+        button.setAlpha(objectFloatingDepth);
 
         button.setOnClickListener(e -> {
+            button.setAlpha(1f);
 //            Toast.makeText(GlobalVariables.mainActivity, String.format("(%s)", e.getAlpha()), Toast.LENGTH_LONG).show();
-            final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, -90f, 0f, 90f);
-            final AlphaAnimation alphaAnimation = new AlphaAnimation(0.9f, 1f);
+            final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, 0f, 0f, -90f);
+            final AlphaAnimation alphaAnimation = new AlphaAnimation(objectFloatingDepth, 1f);
             final RotateAnimation rotateAnimation = new RotateAnimation(0.0f, -45f);
 
             AnimationSet animationSet = new AnimationSet(false);
-            animationSet.setDuration(5000);
-//            animationSet.addAnimation(translateAnimation1);
+            animationSet.setDuration(1000);
+            animationSet.addAnimation(translateAnimation1);
             animationSet.addAnimation(alphaAnimation);
 //            animationSet.addAnimation(rotateAnimation);
             button.startAnimation(animationSet);
@@ -96,17 +98,19 @@ public class Entities {
                         public void run() {
                             // your code here
                             GlobalVariables.mainActivity.runOnUiThread(() -> {
-//                                e.startAnimation(translateAnimation1);
-//                                final TranslateAnimation translateAnimation1 = new TranslateAnimation(0f, 0f, 40f, -0f);
-//                                translateAnimation1.setDuration(200);
-//                                GlobalVariables.constraintLayout.addView(e);
-////                                e.setRotation(-45f);
-////                                button.setRotation(-45);
-//                                e.startAnimation(translateAnimation1);
+                                GlobalVariables.constraintLayout.addView(e);
+                                e.setAlpha(objectFloatingDepth);
+
+                                AnimationSet animationSet = new AnimationSet(false);
+                                animationSet.setDuration(500);
+
+                                animationSet.addAnimation(new TranslateAnimation(0f, 0f, 40f, -0f));
+                                animationSet.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
+                                e.startAnimation(animationSet);
                             });
                         }
                     },
-                    4000
+                    2000
             );
         });
 
