@@ -35,6 +35,7 @@ enum guideline_spawnArea {
 public class Entities {
     static float gridSize;
     float objectFloatingDepth = 0.60f;
+    boolean isAnimating = false;
 
     Entities(int x, int y){
 //        guideline_spawnArea.top = findViewById(R.id.guideline_spawnArea_top);
@@ -58,6 +59,8 @@ public class Entities {
 
 
         button.setOnClickListener(e -> {
+            if (isAnimating) return;
+            isAnimating = true;
             button.setAlpha(1f);
 //            Toast.makeText(GlobalVariables.mainActivity, String.format("(%s)", e.getAlpha()), Toast.LENGTH_LONG).show();
             AnimationSet animationSet = new AnimationSet(false);
@@ -108,7 +111,7 @@ public class Entities {
                 public void onAnimationEnd(Animation animation) {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         GlobalVariables.constraintLayout.removeView(e);
-                        button.setImageResource(R.drawable.plastic);
+                        button.setImageResource((random(0, 10) < 5) ? R.drawable.plastic : R.drawable.nemo);
 
                         new java.util.Timer().schedule(
                                 new java.util.TimerTask() {
@@ -131,6 +134,7 @@ public class Entities {
                                                 @Override
                                                 public void onAnimationEnd(Animation animation1) {
                                                     button.setAnimation(getFloatAnimation());
+                                                    isAnimating = false;
                                                 }
 
                                                 @Override

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         globalVariables.setValues(this);
         makeStatusBarTransparent();
         setUpBackground();
-        Entities.gridSize = 3;
+        Entities.gridSize = 4;
 
         for (int x = 0; x < Entities.gridSize; x++){
             for (int y = 0; y < Entities.gridSize; y++) {
