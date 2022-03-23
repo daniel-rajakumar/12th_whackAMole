@@ -106,54 +106,43 @@ public class Entities {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            GlobalVariables.constraintLayout.removeView(e);
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        GlobalVariables.constraintLayout.removeView(e);
 
-                            new java.util.Timer().schedule(
-                                    new java.util.TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            GlobalVariables.mainActivity.runOnUiThread(() -> {
-                                                GlobalVariables.constraintLayout.addView(e);
-                                                e.setAlpha(objectFloatingDepth);
+                        new java.util.Timer().schedule(
+                                new java.util.TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        GlobalVariables.mainActivity.runOnUiThread(() -> {
+                                            GlobalVariables.constraintLayout.addView(e);
+                                            e.setAlpha(objectFloatingDepth);
 
-                                                AnimationSet animationSet = new AnimationSet(false);
-                                                animationSet.setDuration(500);
+                                            AnimationSet animationSet1 = new AnimationSet(false);
+                                            animationSet1.setDuration(2000);
 
-                                                animationSet.addAnimation(new TranslateAnimation(0f, 0f, 40f, -0f));
-                                                animationSet.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
+                                            animationSet1.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
+                                            animationSet1.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
 
-                                                animationSet.setAnimationListener(new Animation.AnimationListener() {
-                                                    @Override
-                                                    public void onAnimationStart(Animation animation) { }
+                                            animationSet1.setAnimationListener(new Animation.AnimationListener() {
+                                                @Override
+                                                public void onAnimationStart(Animation animation1) { }
 
-                                                    @Override
-                                                    public void onAnimationEnd(Animation animation) {
-                                                        button.setAnimation(getFloatAnimation());
-                                                    }
+                                                @Override
+                                                public void onAnimationEnd(Animation animation1) {
+                                                    button.setAnimation(getFloatAnimation());
+                                                }
 
-                                                    @Override
-                                                    public void onAnimationRepeat(Animation animation) { }
-                                                });
-
-                                                e.startAnimation(animationSet);
-
-
+                                                @Override
+                                                public void onAnimationRepeat(Animation animation1) { }
                                             });
-                                        }
-                                    },
-                                    2000
-                            );
+
+                                            e.startAnimation(animationSet1);
 
 
-
-                        }
+                                        });
+                                    }
+                                },2000);
                     });
-
-
-
                 }
 
                 @Override
