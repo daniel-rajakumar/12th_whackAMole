@@ -3,7 +3,10 @@ package com.example.whackamole;
 import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -50,14 +53,8 @@ public class Entities {
         button.setAlpha(objectFloatingDepth);
 
 
-        AnimationSet animationSet1 = new AnimationSet(false);
-        TranslateAnimation translateAnimation = new TranslateAnimation(random(-15, -5), random(5, 15), 0f, 0f);
-        translateAnimation.setDuration(1000);
-        translateAnimation.setRepeatCount(Animation.INFINITE);
-        translateAnimation.setRepeatMode(Animation.REVERSE);
-//        animationSet1.addAnimation(translateAnimation);
-        button.startAnimation(translateAnimation);
 
+        button.startAnimation(getFloatAnimation());
 
 
         button.setOnClickListener(e -> {
@@ -69,7 +66,11 @@ public class Entities {
             animationSet.addAnimation(new AlphaAnimation(objectFloatingDepth, 1f));
             animationSet.addAnimation(new RotateAnimation(0.0f, -20f,
                     Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f));
-            button.startAnimation(animationSet);
+
+//            button.postDelayed(() -> {
+//                Toast.makeText(GlobalVariables.mainActivity, "hello", Toast.LENGTH_LONG).show();
+//            }, 2000);
+//            button.startAnimation(getFloatAnimation());
 
 
 
@@ -97,29 +98,74 @@ public class Entities {
 //                }
 //            });
 
-            GlobalVariables.constraintLayout.removeView(e);
+            animationSet.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
 
+                }
 
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            // your code here
-                            GlobalVariables.mainActivity.runOnUiThread(() -> {
-                                GlobalVariables.constraintLayout.addView(e);
-                                e.setAlpha(objectFloatingDepth);
+                            GlobalVariables.constraintLayout.removeView(e);
 
-                                AnimationSet animationSet = new AnimationSet(false);
-                                animationSet.setDuration(500);
+                            new java.util.Timer().schedule(
+                                    new java.util.TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            GlobalVariables.mainActivity.runOnUiThread(() -> {
+                                                GlobalVariables.constraintLayout.addView(e);
+                                                e.setAlpha(objectFloatingDepth);
 
-                                animationSet.addAnimation(new TranslateAnimation(0f, 0f, 40f, -0f));
-                                animationSet.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
-                                e.startAnimation(animationSet);
-                            });
+                                                AnimationSet animationSet = new AnimationSet(false);
+                                                animationSet.setDuration(500);
+
+                                                animationSet.addAnimation(new TranslateAnimation(0f, 0f, 40f, -0f));
+                                                animationSet.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
+
+                                                animationSet.setAnimationListener(new Animation.AnimationListener() {
+                                                    @Override
+                                                    public void onAnimationStart(Animation animation) { }
+
+                                                    @Override
+                                                    public void onAnimationEnd(Animation animation) {
+                                                        button.setAnimation(getFloatAnimation());
+                                                    }
+
+                                                    @Override
+                                                    public void onAnimationRepeat(Animation animation) { }
+                                                });
+
+                                                e.startAnimation(animationSet);
+
+
+                                            });
+                                        }
+                                    },
+                                    2000
+                            );
+
+
+
                         }
-                    },
-                    2000
-            );
+                    });
+
+
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+
+            button.startAnimation(animationSet);
+
+
         });
 
         ConstraintSet constraintSet = new ConstraintSet();
@@ -161,6 +207,15 @@ public class Entities {
 //        }).start();
 
 
+    }
+
+    TranslateAnimation getFloatAnimation(){
+        TranslateAnimation translateAnimation = new TranslateAnimation(random(-15, -5), random(5, 15), 0f, 0f);
+        translateAnimation.setDuration(750);
+        translateAnimation.setRepeatCount(Animation.INFINITE);
+        translateAnimation.setRepeatMode(Animation.REVERSE);
+//        animationSet1.addAnimation(translateAnimation);
+        return translateAnimation;
     }
 
     public static int getScreenWidth(Context context) {
