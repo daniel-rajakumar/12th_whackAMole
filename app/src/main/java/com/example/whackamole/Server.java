@@ -14,12 +14,7 @@ public class Server {
     private static final String TAG = "network";
     GlobalVariables globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
 
-    public static void main(String[] args) {
-
-    }
-
     Server() throws IOException {
-        globalVariables.getButton_server().setOnClickListener(v -> {
             Toast.makeText(GlobalVariables.mainActivity, "You are server. ", Toast.LENGTH_SHORT).show();
 
             try {
@@ -45,6 +40,5 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
     }
 }

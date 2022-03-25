@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
-            new Server();
             new Client();
         } catch (IOException e) {
             e.printStackTrace();

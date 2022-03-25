@@ -14,7 +14,6 @@ public class Client {
     GlobalVariables globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
 
     Client() throws IOException {
-        globalVariables.getButton_client().setOnClickListener(v -> {
             Toast.makeText(GlobalVariables.mainActivity, "You are client. ", Toast.LENGTH_SHORT).show();
 
             try {
@@ -35,8 +34,5 @@ public class Client {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-        });
     }
 }
