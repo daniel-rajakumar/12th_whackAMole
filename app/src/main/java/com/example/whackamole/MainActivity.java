@@ -31,22 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        makeStatusBarTransparent();
-//        setUpBackground();
-//        Entities.gridSize = 4;
-//
-//        for (int x = 0; x < Entities.gridSize; x++){
-//            for (int y = 0; y < Entities.gridSize; y++) {
-//                new Entities(x, y);
-//            }
-//        }
-        GetIPAddress();
+        makeStatusBarTransparent();
+        setUpBackground();
+        Entities.gridSize = 4;
 
-
-        try {
-            new Client();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int x = 0; x < Entities.gridSize; x++){
+            for (int y = 0; y < Entities.gridSize; y++) {
+                new Entities(x, y);
+            }
         }
     }
 
@@ -73,9 +65,4 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void GetIPAddress() {
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE); assert wifiManager != null;
-        String ip = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
-        Log.d(TAG, String.format("IP Address: %s", ip));
-    }
 }
