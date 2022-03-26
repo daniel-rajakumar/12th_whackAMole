@@ -5,31 +5,48 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "networking";
     GlobalVariables globalVariables;
 
 
     void run(){
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);
-        makeStatusBarTransparent();
-        setUpBackground();
-        Entities.gridSize = 4;
 
-        for (int x = 0; x < Entities.gridSize; x++){
-            for (int y = 0; y < Entities.gridSize; y++) {
-                new Entities(x, y);
-            }
+
+
+//        makeStatusBarTransparent();
+//        setUpBackground();
+//        Entities.gridSize = 4;
+//
+//        for (int x = 0; x < Entities.gridSize; x++){
+//            for (int y = 0; y < Entities.gridSize; y++) {
+//                new Entities(x, y);
+//            }
+//        }
+        GetIPAddress();
+
+
+        try {
+            new Client();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -37,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
         run();
     }
 
@@ -50,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
         winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
         getWindow().setAttributes(winParams);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    private void GetIPAddress() {
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE); assert wifiManager != null;
+        String ip = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+        Log.d(TAG, String.format("IP Address: %s", ip));
     }
 }
