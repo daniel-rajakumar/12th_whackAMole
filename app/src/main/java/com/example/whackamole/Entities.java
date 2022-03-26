@@ -164,14 +164,10 @@ public class Entities {
         });
 
         ConstraintSet constraintSet = new ConstraintSet();
-//        ConstraintLayout viewGroup = findViewById(R.id.mainLayout);
 
         GlobalVariables.constraintLayout.addView(button);
 
         constraintSet.clone(GlobalVariables.constraintLayout);
-
-//        constraintSet.constrainPercentHeight(button.getId(), 0.2f);
-//        constraintSet.constrainPercentWidth(button.getId(), 0.2f);
 
 
         constraintSet.setVerticalBias  (button.getId(), y/(gridSize - 1));
@@ -182,24 +178,12 @@ public class Entities {
         constraintSet.connect(button.getId(), ConstraintSet.RIGHT , guideline_spawnArea.RIGHT.id , ConstraintSet.RIGHT );
         constraintSet.connect(button.getId(), ConstraintSet.BOTTOM, guideline_spawnArea.BOTTOM.id, ConstraintSet.BOTTOM);
 
-//        constraintSet.constrainDefaultHeight(button.getId(), 35);
-
         constraintSet.applyTo(GlobalVariables.constraintLayout);
 
 
 
         button.getLayoutParams().height = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15);
         button.getLayoutParams().width = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15); ;
-
-
-//        new Thread(() -> {
-//            try {
-//                Thread.sleep(10000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            GlobalVariables.mainActivity.runOnUiThread(() -> linearLayout.removeView(button));
-//        }).start();
 
 
     }
