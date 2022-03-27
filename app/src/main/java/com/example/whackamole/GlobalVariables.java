@@ -1,6 +1,10 @@
 package com.example.whackamole;
 
+import android.app.Activity;
 import android.app.Application;
+import android.graphics.Color;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,12 +13,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class GlobalVariables extends Application {
 
-    static MainActivity mainActivity;
+    static GameActivity mainActivity;
     private ImageView imageView_background;
     static ConstraintLayout constraintLayout;
     private TextView textView_timer, textView_score;
 
-    public void setValues(MainActivity mainActivity){
+    public void setValues(GameActivity mainActivity){
         GlobalVariables.mainActivity = mainActivity;
         imageView_background = mainActivity.findViewById(R.id.imageView_background);
         constraintLayout = mainActivity.findViewById(R.id.mainLayout);
@@ -34,4 +38,14 @@ public class GlobalVariables extends Application {
     public TextView getTextView_score() {
         return textView_score;
     }
+
+
+    public static void makeStatusBarTransparent(Activity activity) {
+        activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        WindowManager.LayoutParams winParams = activity.getWindow().getAttributes();
+        winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        activity.getWindow().setAttributes(winParams);
+        activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
 }

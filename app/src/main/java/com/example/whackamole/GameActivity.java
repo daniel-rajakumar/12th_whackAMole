@@ -1,26 +1,18 @@
 package com.example.whackamole;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.format.Formatter;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.stream.IntStream;
+public class GameActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
     private static final String TAG = "networking";
     GlobalVariables globalVariables;
 
@@ -29,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);
 
-
-
-        makeStatusBarTransparent();
+        GlobalVariables.makeStatusBarTransparent(this);
         setUpBackground();
         Entities.gridSize = 3;
 
@@ -66,30 +56,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
-        run();
+
+        startActivity(new Intent(this, LoadingScreen.class));
     }
 
     void setUpBackground(){
         Glide.with(this).load(R.drawable.background_water).into(globalVariables.getImageView_background());
     }
 
-    public void makeStatusBarTransparent() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        WindowManager.LayoutParams winParams = getWindow().getAttributes();
-        winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        getWindow().setAttributes(winParams);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
 
 
     public int random(int from, int to){
         return (int)(Math.random() * (to - from + 1)) + from;
     }
+
 
 
 }

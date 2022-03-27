@@ -35,7 +35,7 @@ public class Entities {
     boolean isAnimating = false, isSelected;
     GlobalVariables globalVariables;
     static int score;
-    ImageView button;
+    ImageView imageView;
 
     static boolean[][] isAvailable = new boolean[(int) gridSize][(int) gridSize];
     private final int x, y;
@@ -47,41 +47,41 @@ public class Entities {
         this.ms = ms;
 
         globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
-        button = new ImageView(GlobalVariables.mainActivity);
-        button.setId(View.generateViewId());
-        button.setRotation(-45);
+        imageView = new ImageView(GlobalVariables.mainActivity);
+        imageView.setId(View.generateViewId());
+        imageView.setRotation(-45);
         isAvailable[x][y] = true;
 
         int image = getRandomImage();
-        button.setImageResource(image);
-        button.setTag(image);
-        button.setAlpha(objectFloatingDepth);
+        imageView.setImageResource(image);
+        imageView.setTag(image);
+        imageView.setAlpha(objectFloatingDepth);
 
-        button.startAnimation(onAppearAnimation());
+        imageView.startAnimation(onAppearAnimation());
 
-        button.setOnClickListener(this::onClickSetUp);
+        imageView.setOnClickListener(this::onClickSetUp);
 
-        GlobalVariables.constraintLayout.addView(button);
+        GlobalVariables.constraintLayout.addView(imageView);
 
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(GlobalVariables.constraintLayout);
 
 
-        constraintSet.setVerticalBias  (button.getId(), y/(gridSize - 1));
-        constraintSet.setHorizontalBias(button.getId(), x/(gridSize - 1));
+        constraintSet.setVerticalBias  (imageView.getId(), y/(gridSize - 1));
+        constraintSet.setHorizontalBias(imageView.getId(), x/(gridSize - 1));
 
-        constraintSet.connect(button.getId(), ConstraintSet.TOP   , guideline_spawnArea.TOP.id   , ConstraintSet.TOP   );
-        constraintSet.connect(button.getId(), ConstraintSet.LEFT  , guideline_spawnArea.LEFT.id  , ConstraintSet.LEFT  );
-        constraintSet.connect(button.getId(), ConstraintSet.RIGHT , guideline_spawnArea.RIGHT.id , ConstraintSet.RIGHT );
-        constraintSet.connect(button.getId(), ConstraintSet.BOTTOM, guideline_spawnArea.BOTTOM.id, ConstraintSet.BOTTOM);
+        constraintSet.connect(imageView.getId(), ConstraintSet.TOP   , guideline_spawnArea.TOP.id   , ConstraintSet.TOP   );
+        constraintSet.connect(imageView.getId(), ConstraintSet.LEFT  , guideline_spawnArea.LEFT.id  , ConstraintSet.LEFT  );
+        constraintSet.connect(imageView.getId(), ConstraintSet.RIGHT , guideline_spawnArea.RIGHT.id , ConstraintSet.RIGHT );
+        constraintSet.connect(imageView.getId(), ConstraintSet.BOTTOM, guideline_spawnArea.BOTTOM.id, ConstraintSet.BOTTOM);
 
         constraintSet.applyTo(GlobalVariables.constraintLayout);
 
 
 
-        button.getLayoutParams().height = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15);
-        button.getLayoutParams().width = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15); ;
+        imageView.getLayoutParams().height = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15);
+        imageView.getLayoutParams().width = (int) (getScreenWidth(GlobalVariables.mainActivity) * 0.15); ;
 
 
     }
@@ -92,7 +92,7 @@ public class Entities {
         public void run() {
             GlobalVariables.mainActivity.runOnUiThread(() -> {
                 if (!isSelected)
-                    button.setAnimation(onDisappearAnimation());
+                    imageView.setAnimation(onDisappearAnimation());
             });
         }
     }
@@ -109,10 +109,10 @@ public class Entities {
             globalVariables.getTextView_score().setText(++score + "");
         }
         imageView.setAlpha(1f);
-        imageView.startAnimation(clickAnimation(imageView));
+        imageView.startAnimation(clickAnimation());
     }
 
-    AnimationSet clickAnimation(ImageView imageView){
+    AnimationSet clickAnimation(){
         AnimationSet animationSet = new AnimationSet(false);
         animationSet.setDuration(1000);
         animationSet.addAnimation(new TranslateAnimation(0f, 0f, 0f, -90f));
@@ -159,7 +159,7 @@ public class Entities {
             @Override
             public void onAnimationEnd(Animation animation) {
                 new java.util.Timer().schedule(new Hide(), ms);
-                button.setAnimation(getFloatAnimation());
+                imageView.setAnimation(getFloatAnimation());
                 isAnimating = false;
             }
 
@@ -196,8 +196,8 @@ public class Entities {
     }
 
     void removeImage(){
-        GlobalVariables.constraintLayout.removeView(button);
-        button.setImageDrawable(null);
+        GlobalVariables.constraintLayout.removeView(imageView);
+        imageView.setImageDrawable(null);
         isAvailable[x][y] = false;
     }
 
