@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         makeStatusBarTransparent();
         setUpBackground();
-        Entities.gridSize = 4;
+        Entities.gridSize = 3;
 
         for (int x = 0; x < Entities.gridSize; x++){
             for (int y = 0; y < Entities.gridSize; y++) {

@@ -33,15 +33,22 @@ enum guideline_spawnArea {
 }
 
 public class Entities {
+    private static final String TAG = "test";
     static float gridSize;
     float objectFloatingDepth = 0.60f;
     boolean isAnimating = false;
+    GlobalVariables globalVariables;
+    static int score;
 
     Entities(int x, int y){
+        globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
         ImageView button = new ImageView(GlobalVariables.mainActivity);
         button.setId(View.generateViewId());
         button.setRotation(-45);
-        button.setImageResource(R.drawable.nemo);
+
+//        int image = getRandomImage();
+//        button.setImageResource(image);
+//        button.setTag(image);
 
         button.setAlpha(objectFloatingDepth);
 
@@ -79,6 +86,11 @@ public class Entities {
     void onClickSetUp(ImageView imageView){
         if (isAnimating) return;
         isAnimating = true;
+        if (imageView.getTag() == null) return;
+        Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
+        if ((int) imageView.getTag() == R.drawable.plastic){
+            globalVariables.getTextView_score().setText(++score + "");
+        }
         imageView.setAlpha(1f);
         imageView.startAnimation(clickAnimation(imageView));
     }
@@ -99,7 +111,10 @@ public class Entities {
             public void onAnimationEnd(Animation animation) {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     GlobalVariables.constraintLayout.removeView(imageView);
-                    imageView.setImageResource((random(0, 10) < 5) ? R.drawable.plastic : R.drawable.nemo);
+
+                    int image = getRandomImage();
+                    imageView.setImageResource(image);
+                    imageView.setTag(image);
 
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
@@ -158,6 +173,14 @@ public class Entities {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
+    }
+
+    int getRandomImage(){
+        switch (random(0, 1)){
+            case 0: return R.drawable.nemo;
+            case 1: return R.drawable.plastic;
+            default: return -1;
+        }
     }
 
 
