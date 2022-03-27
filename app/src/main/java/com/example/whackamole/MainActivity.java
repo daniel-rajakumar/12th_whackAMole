@@ -35,11 +35,32 @@ public class MainActivity extends AppCompatActivity {
         setUpBackground();
         Entities.gridSize = 3;
 
-        for (int x = 0; x < Entities.gridSize; x++){
-            for (int y = 0; y < Entities.gridSize; y++) {
-                new Entities(x, y);
-            }
-        }
+//        for (int x = 0; x < Entities.gridSize; x++){
+//            for (int y = 0; y < Entities.gridSize; y++) {
+//                new Entities(x, y);
+//            }
+//        }
+
+        Entities.isAvailable = new boolean[(int) Entities.gridSize][(int) Entities.gridSize];
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        GlobalVariables.mainActivity.runOnUiThread(() -> {
+                            if (Entities.isSpaceAvailable()){
+                                int x, y;
+                                do {
+                                    x = random(0, 2);
+                                    y = random(0, 2);
+                                } while (Entities.isAvailable(x, y));
+
+                                new Entities(x, y);
+                            }
+                        });
+                    }
+
+                }, 0, 2000);
     }
 
     @Override
@@ -64,5 +85,11 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setAttributes(winParams);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
+
+
+    public int random(int from, int to){
+        return (int)(Math.random() * (to - from + 1)) + from;
+    }
+
 
 }

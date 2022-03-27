@@ -40,19 +40,50 @@ public class Entities {
     GlobalVariables globalVariables;
     static int score;
 
+    static boolean[][] isAvailable = new boolean[(int) gridSize][(int) gridSize];
+    private final int x, y;
+
     Entities(int x, int y){
+        this.x = x;
+        this.y = y;
+
         globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
         ImageView button = new ImageView(GlobalVariables.mainActivity);
         button.setId(View.generateViewId());
         button.setRotation(-45);
+        isAvailable[x][y] = true;
 
-//        int image = getRandomImage();
-//        button.setImageResource(image);
-//        button.setTag(image);
+        int image = getRandomImage();
+        button.setImageResource(image);
+        button.setTag(image);
 
         button.setAlpha(objectFloatingDepth);
 
-        button.startAnimation(getFloatAnimation());
+        AnimationSet animationSet1 = new AnimationSet(false);
+        animationSet1.setDuration(2000);
+
+        animationSet1.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
+        animationSet1.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
+
+        animationSet1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation1) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation1) {
+                button.setAnimation(getFloatAnimation());
+                isAnimating = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation1) { }
+        });
+
+        button.startAnimation(animationSet1);
+
+
+
+//        button.startAnimation(getFloatAnimation());
 
 
         button.setOnClickListener(e -> onClickSetUp(button));
@@ -84,9 +115,9 @@ public class Entities {
 
 
     void onClickSetUp(ImageView imageView){
+        if (imageView.getTag() == null) return;
         if (isAnimating) return;
         isAnimating = true;
-        if (imageView.getTag() == null) return;
         Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
         if ((int) imageView.getTag() == R.drawable.plastic){
             globalVariables.getTextView_score().setText(++score + "");
@@ -111,7 +142,9 @@ public class Entities {
             public void onAnimationEnd(Animation animation) {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     GlobalVariables.constraintLayout.removeView(imageView);
+                    isAvailable[x][y] = false;
 
+                    /*
                     int image = getRandomImage();
                     imageView.setImageResource(image);
                     imageView.setTag(image);
@@ -151,6 +184,7 @@ public class Entities {
                                 }
 
                             }, random(500, 3000));
+                     */
                 });
             }
 
@@ -183,6 +217,22 @@ public class Entities {
         }
     }
 
+
+    public static boolean isAvailable(int x, int y) {
+        return isAvailable[x][y];
+    }
+
+    public static boolean isSpaceAvailable(){
+        for (boolean[] i: isAvailable){
+            for (boolean j: i){
+                if (!j)
+                    return true;
+            }
+        }
+
+        return false;
+
+    }
 
     public int random(int from, int to){
         return (int)(Math.random() * (to - from + 1)) + from;
