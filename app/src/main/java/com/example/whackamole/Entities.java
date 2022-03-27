@@ -22,6 +22,8 @@ import android.widget.Toast;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import javax.microedition.khronos.opengles.GL;
+
 enum guideline_spawnArea {
     TOP(R.id.guideline_spawnArea_top),
     BOTTOM(R.id.guideline_spawnArea_bottom),
@@ -43,7 +45,7 @@ public class Entities {
     static boolean[][] isAvailable = new boolean[(int) gridSize][(int) gridSize];
     private final int x, y;
 
-    Entities(int x, int y){
+    Entities(int x, int y, int ms){
         this.x = x;
         this.y = y;
 
@@ -59,9 +61,10 @@ public class Entities {
 
         button.setAlpha(objectFloatingDepth);
 
-        AnimationSet animationSet1 = new AnimationSet(false);
-        animationSet1.setDuration(2000);
 
+
+        AnimationSet animationSet1 = new AnimationSet(false);
+        animationSet1.setDuration(ms/4);
         animationSet1.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
         animationSet1.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
 
@@ -81,7 +84,17 @@ public class Entities {
 
         button.startAnimation(animationSet1);
 
-
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        GlobalVariables.mainActivity.runOnUiThread(() -> {
+                            GlobalVariables.constraintLayout.removeView(button);
+                            button.setImageDrawable(null);
+                            isAvailable[x][y] = false;
+                        });
+                    }
+                }, ms);
 
 //        button.startAnimation(getFloatAnimation());
 

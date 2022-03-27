@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                                     y = random(0, 2);
                                 } while (Entities.isAvailable(x, y));
 
-                                new Entities(x, y);
+                                new Entities(x, y, 2000);
                             }
                         });
                     }
