@@ -2,7 +2,6 @@ package com.example.whackamole;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -11,18 +10,13 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import javax.microedition.khronos.opengles.GL;
+import java.util.TimerTask;
 
 enum guideline_spawnArea {
     TOP(R.id.guideline_spawnArea_top),
@@ -41,16 +35,19 @@ public class Entities {
     boolean isAnimating = false;
     GlobalVariables globalVariables;
     static int score;
+    ImageView button;
 
     static boolean[][] isAvailable = new boolean[(int) gridSize][(int) gridSize];
     private final int x, y;
+    private final int ms;
 
     Entities(int x, int y, int ms){
         this.x = x;
         this.y = y;
+        this.ms = ms;
 
         globalVariables = (GlobalVariables) GlobalVariables.mainActivity.getApplication();
-        ImageView button = new ImageView(GlobalVariables.mainActivity);
+        button = new ImageView(GlobalVariables.mainActivity);
         button.setId(View.generateViewId());
         button.setRotation(-45);
         isAvailable[x][y] = true;
@@ -58,53 +55,16 @@ public class Entities {
         int image = getRandomImage();
         button.setImageResource(image);
         button.setTag(image);
-
         button.setAlpha(objectFloatingDepth);
 
+        button.startAnimation(onAppearAnimation());
 
-
-        AnimationSet animationSet1 = new AnimationSet(false);
-        animationSet1.setDuration(ms/4);
-        animationSet1.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
-        animationSet1.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
-
-        animationSet1.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation1) { }
-
-            @Override
-            public void onAnimationEnd(Animation animation1) {
-                button.setAnimation(getFloatAnimation());
-                isAnimating = false;
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation1) { }
-        });
-
-        button.startAnimation(animationSet1);
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        GlobalVariables.mainActivity.runOnUiThread(() -> {
-                            GlobalVariables.constraintLayout.removeView(button);
-                            button.setImageDrawable(null);
-                            isAvailable[x][y] = false;
-                        });
-                    }
-                }, ms);
-
-//        button.startAnimation(getFloatAnimation());
-
-
-        button.setOnClickListener(e -> onClickSetUp(button));
-
-        ConstraintSet constraintSet = new ConstraintSet();
+        button.setOnClickListener(this::onClickSetUp);
 
         GlobalVariables.constraintLayout.addView(button);
 
+
+        ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(GlobalVariables.constraintLayout);
 
 
@@ -126,8 +86,19 @@ public class Entities {
 
     }
 
+    class Hide extends TimerTask {
 
-    void onClickSetUp(ImageView imageView){
+        @Override
+        public void run() {
+            GlobalVariables.mainActivity.runOnUiThread(() -> {
+                button.setAnimation(onDisappearAnimation());
+            });
+        }
+    }
+
+
+    void onClickSetUp(View view){
+        ImageView imageView = (ImageView) view;
         if (imageView.getTag() == null) return;
         if (isAnimating) return;
         isAnimating = true;
@@ -154,50 +125,7 @@ public class Entities {
             @Override
             public void onAnimationEnd(Animation animation) {
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    GlobalVariables.constraintLayout.removeView(imageView);
-                    isAvailable[x][y] = false;
-
-                    /*
-                    int image = getRandomImage();
-                    imageView.setImageResource(image);
-                    imageView.setTag(image);
-
-                    new java.util.Timer().schedule(
-                            new java.util.TimerTask() {
-                                @Override
-                                public void run() {
-                                    GlobalVariables.mainActivity.runOnUiThread(() -> {
-                                        GlobalVariables.constraintLayout.addView(imageView);
-                                        imageView.setAlpha(objectFloatingDepth);
-
-                                        AnimationSet animationSet1 = new AnimationSet(false);
-                                        animationSet1.setDuration(2000);
-
-                                        animationSet1.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
-                                        animationSet1.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
-
-                                        animationSet1.setAnimationListener(new Animation.AnimationListener() {
-                                            @Override
-                                            public void onAnimationStart(Animation animation1) { }
-
-                                            @Override
-                                            public void onAnimationEnd(Animation animation1) {
-                                                imageView.setAnimation(getFloatAnimation());
-                                                isAnimating = false;
-                                            }
-
-                                            @Override
-                                            public void onAnimationRepeat(Animation animation1) { }
-                                        });
-
-                                        imageView.startAnimation(animationSet1);
-
-
-                                    });
-                                }
-
-                            }, random(500, 3000));
-                     */
+                    removeImage();
                 });
             }
 
@@ -214,6 +142,61 @@ public class Entities {
         translateAnimation.setRepeatCount(Animation.INFINITE);
         translateAnimation.setRepeatMode(Animation.REVERSE);
         return translateAnimation;
+    }
+
+    AnimationSet onAppearAnimation(){
+        AnimationSet animationSet = new AnimationSet(false);
+        animationSet.setDuration(ms/4);
+        animationSet.addAnimation(new TranslateAnimation(-100f, 0f, 90f, -0f));
+        animationSet.addAnimation(new AlphaAnimation(0f, objectFloatingDepth));
+
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                new java.util.Timer().schedule(new Hide(), ms);
+                button.setAnimation(getFloatAnimation());
+                isAnimating = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+
+        return animationSet;
+    }
+
+    AnimationSet onDisappearAnimation(){
+        AnimationSet animationSet = new AnimationSet(false);
+
+        animationSet.setDuration(ms);
+        animationSet.addAnimation(new TranslateAnimation(0f, -100f, 0f, 90f));
+        animationSet.addAnimation(new AlphaAnimation(objectFloatingDepth, 0f));
+
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation1) { }
+
+            @Override
+            public void onAnimationEnd(Animation animation1) {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    removeImage();
+                });
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation1) { }
+        });
+
+        return animationSet;
+    }
+
+    void removeImage(){
+        GlobalVariables.constraintLayout.removeView(button);
+        button.setImageDrawable(null);
+        isAvailable[x][y] = false;
     }
 
     public static int getScreenWidth(Context context) {
