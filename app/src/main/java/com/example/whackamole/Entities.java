@@ -32,7 +32,7 @@ public class Entities {
     private static final String TAG = "test";
     static float gridSize;
     float objectFloatingDepth = 0.60f;
-    boolean isAnimating = false;
+    boolean isAnimating = false, isSelected;
     GlobalVariables globalVariables;
     static int score;
     ImageView button;
@@ -91,7 +91,8 @@ public class Entities {
         @Override
         public void run() {
             GlobalVariables.mainActivity.runOnUiThread(() -> {
-                button.setAnimation(onDisappearAnimation());
+                if (!isSelected)
+                    button.setAnimation(onDisappearAnimation());
             });
         }
     }
@@ -101,6 +102,7 @@ public class Entities {
         ImageView imageView = (ImageView) view;
         if (imageView.getTag() == null) return;
         if (isAnimating) return;
+        isSelected = true;
         isAnimating = true;
         Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
         if ((int) imageView.getTag() == R.drawable.plastic){
