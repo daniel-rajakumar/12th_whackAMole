@@ -50,7 +50,8 @@ tools:context=".MainActivity">
     app:layout_constraintBottom_toTopOf="@+id/guideline_timer_bottom"
     app:layout_constraintEnd_toStartOf="@+id/guideline_timer_right"
     app:layout_constraintStart_toStartOf="@+id/guideline_timer_left"
-    app:layout_constraintTop_toTopOf="@+id/guideline_timer_top">
+    app:layout_constraintTop_toTopOf="@+id/guideline_timer_top"
+    >
 
     <TextView
         android:id="@+id/textView_timer"
@@ -61,33 +62,49 @@ tools:context=".MainActivity">
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/constrainLayout_score"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:background="#D11919"
-    app:layout_constraintBottom_toTopOf="@+id/guideline_score_bottom"
-    app:layout_constraintEnd_toStartOf="@+id/guideline_score_right"
-    app:layout_constraintStart_toStartOf="@+id/guideline_score_left"
-    app:layout_constraintTop_toTopOf="@+id/guideline_score_top">
-
-    <TextView
-        android:id="@+id/textView_score"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainLayout_score"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:text="score"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="#ff0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_score_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_score_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_score_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_score_top">
 
-<androidx.constraintlayout.widget.Guideline
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_score"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#E13232"
+        android:foregroundGravity="left"
+        android:gravity="start"
+        android:visibility="visible"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_score_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_score_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_score_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_score_top"
+
+        >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline_platform_left"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

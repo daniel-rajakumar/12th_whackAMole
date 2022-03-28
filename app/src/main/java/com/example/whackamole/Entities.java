@@ -7,12 +7,14 @@ import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintSet;
 
@@ -53,6 +55,7 @@ public class Entities {
         isAvailable[x][y] = true;
 
         int image = getRandomImage();
+        image = R.drawable.plastic;
         imageView.setImageResource(image);
         imageView.setTag(image);
         imageView.setAlpha(objectFloatingDepth);
@@ -106,7 +109,42 @@ public class Entities {
         isAnimating = true;
         Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
         if ((int) imageView.getTag() == R.drawable.plastic){
-            globalVariables.getTextView_score().setText(++score + "");
+//            globalVariables.getTextView_score().setText(++score + "");
+
+
+            ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
+            _imageView.setImageResource(R.drawable.plastic);
+            _imageView.setId(View.generateViewId());
+//            _imageView.requestLayout();
+//            _imageView.getLayoutParams().width = 10;
+
+            globalVariables.getLinearLayout_score().addView(_imageView);
+
+            ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 10, 0, 10);
+
+            globalVariables.getConstraintLayout_score().setLayoutParams(params);
+//            ConstraintSet constraintSet = new ConstraintSet();
+//            constraintSet.clone(GlobalVariables.constraintLayout_score);
+//
+////            constraintSet.setVerticalBias  (imageView.getId(), y/(gridSize - 1));
+//            score++;
+//            constraintSet.setHorizontalBias(_imageView.getId(), score);
+//
+//            constraintSet.connect(_imageView.getId(), ConstraintSet.TOP   , ConstraintSet.PARENT_ID, ConstraintSet.TOP   , 0);
+//            constraintSet.connect(_imageView.getId(), ConstraintSet.LEFT  , ConstraintSet.PARENT_ID, ConstraintSet.LEFT  , 0);
+//            constraintSet.connect(_imageView.getId(), ConstraintSet.RIGHT , ConstraintSet.PARENT_ID, ConstraintSet.RIGHT , 0);
+//            constraintSet.connect(_imageView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+//
+//            constraintSet.applyTo(GlobalVariables.constraintLayout_score);
+
+
+
+            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
+                    (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+
+            _imageView.setLayoutParams(textParam);
+
         }
         imageView.setAlpha(1f);
         imageView.startAnimation(clickAnimation());
