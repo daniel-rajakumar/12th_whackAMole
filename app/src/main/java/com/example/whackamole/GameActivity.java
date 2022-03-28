@@ -62,7 +62,8 @@ public class GameActivity extends AppCompatActivity {
 
         StrictMode.setThreadPolicy(policy);
 
-        startActivity(new Intent(this, LoadingScreen.class));
+//        startActivity(new Intent(this, LoadingScreen.class));
+        run();
     }
 
     void setUpBackground(){

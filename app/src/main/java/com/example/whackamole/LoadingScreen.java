@@ -15,8 +15,9 @@ public class LoadingScreen extends AppCompatActivity {
 
         GlobalVariables.makeStatusBarTransparent(this);
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(this, MenuScreen.class));
+//            startActivity(new Intent(this, MenuScreen.class));
+            startActivity(new Intent(this, GameActivity.class));
             finish();
-        }, 3000);
+        }, 3);
     }
 }
