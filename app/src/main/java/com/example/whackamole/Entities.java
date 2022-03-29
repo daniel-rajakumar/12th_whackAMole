@@ -35,7 +35,6 @@ enum guideline_spawnArea {
 }
 
 public class Entities {
-    private static final String TAG = "test";
     static float gridSize;
     float objectFloatingDepth = 0.60f;
     boolean isAnimating = false, isSelected;
@@ -109,7 +108,6 @@ public class Entities {
         if (isAnimating) return;
         isSelected = true;
         isAnimating = true;
-        Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
         if ((int) imageView.getTag() == R.drawable.plastic){
             GameActivity.score++;
 

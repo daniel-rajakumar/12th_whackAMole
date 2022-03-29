@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 
 public class GameActivity extends AppCompatActivity {
 
-    private static final String TAG = "networking";
     GlobalVariables globalVariables;
     static int time_second = 60;
     static int score;
@@ -32,13 +31,35 @@ public class GameActivity extends AppCompatActivity {
         GlobalVariables.mediaPlayer_background.start();
 
         GlobalVariables.makeStatusBarTransparent(this);
+
+        // add gif in imageView
         Glide.with(this).load(R.drawable.background_water).into((ImageView) findViewById(R.id.imageView_background));
+
         Entities.gridSize = 3;
 
         Entities.isAvailable = new boolean[(int) Entities.gridSize][(int) Entities.gridSize];
 
+        popEntitiesAtRandomPlaces();
         startTimer();
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
+        run();
+    }
+
+    static void decreesGameTime(){
+        time_second -= 5;
+    }
+
+    void popEntitiesAtRandomPlaces(){
         new Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
@@ -61,28 +82,6 @@ public class GameActivity extends AppCompatActivity {
 
                 }, 0, 2000);
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-        StrictMode.setThreadPolicy(policy);
-
-//        startActivity(new Intent(this, LoadingScreen.class));
-        run();
-    }
-
-    void setUpBackground(){
-        Glide.with(this).load(R.drawable.background_water).into(globalVariables.getImageView_background());
-    }
-
-    static void decreesGameTime(){
-        time_second -= 5;
-    }
-
 
     void startTimer(){
         new Timer().schedule(new TimerTask(){
