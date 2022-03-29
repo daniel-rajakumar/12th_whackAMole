@@ -3,6 +3,7 @@ package com.example.whackamole;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,8 +22,12 @@ public class MenuScreen extends AppCompatActivity {
         Button button = findViewById(R.id.button_play);
 
         button.setOnClickListener(v -> {
+            GlobalVariables.mediaPlayer_menu.stop();
             finish();
             startActivity(new Intent(this, GameActivity.class));
         });
+
+        GlobalVariables.mediaPlayer_menu = MediaPlayer.create(this, R.raw.menu);
+        GlobalVariables.mediaPlayer_menu.start();
     }
 }

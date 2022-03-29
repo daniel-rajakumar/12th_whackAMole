@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -18,13 +19,17 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "networking";
     GlobalVariables globalVariables;
-    static int time_second = 15;
+    static int time_second = 30;
     static int score;
 
 
     void run(){
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);
+
+        // start music
+        GlobalVariables.mediaPlayer_background = MediaPlayer.create(this, R.raw.background);
+        GlobalVariables.mediaPlayer_background.start();
 
         GlobalVariables.makeStatusBarTransparent(this);
         Glide.with(this).load(R.drawable.background_water).into((ImageView) findViewById(R.id.imageView_background));

@@ -3,6 +3,7 @@ package com.example.whackamole;
 import android.app.Activity;
 import android.app.Application;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ public class GlobalVariables extends Application {
     static ConstraintLayout constraintLayout, constraintLayout_score;
     private TextView textView_timer, textView_score;
     private LinearLayout linearLayout_score;
+
+    static MediaPlayer mediaPlayer_background, mediaPlayer_victory, mediaPlayer_menu;
 
     public void setValues(GameActivity mainActivity){
         GlobalVariables.mainActivity = mainActivity;
