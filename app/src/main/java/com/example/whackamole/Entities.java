@@ -111,143 +111,26 @@ public class Entities {
         isAnimating = true;
         Log.d(TAG, "onClickSetUp: " + imageView.getTag() + " == " + R.drawable.nemo + " = " + ((int) imageView.getTag() == R.drawable.nemo));
         if ((int) imageView.getTag() == R.drawable.plastic){
-
-
-//            Button button = new Button(GlobalVariables.mainActivity);
-//
-//            globalVariables.get
-
-
-//            globalVariables.getTextView_score().setText(++score + "");
-            /*
-
-            ConstraintLayout.LayoutParams lp =
-            new ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT);
-
-            ConstraintSet constraintSet = new ConstraintSet();
-            constraintSet.clone(GlobalVariables.constraintLayout_score);
-
-//            GlobalVariables.constraintLayout_score.addView(imageView);
-//            _imageView.requestLayout();
-
-//            _imageView.getLayoutParams().width = 10;
-            score++;
-
-//            constraintSet.clone(GlobalVariables.constraintLayout_score);
-
-            Button button = new Button(GlobalVariables.mainActivity);
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT);
-//            button.setLayoutParams(params);
-            button.setText("hello");
-            button.setId(View.generateViewId());
-            GlobalVariables.constraintLayout_score.addView(button);
-
-            button.setLayoutParams(lp);
-            constraintSet.clone(GlobalVariables.constraintLayout_score);
-            constraintSet.connect(button.getId(), ConstraintSet.TOP   , ConstraintSet.PARENT_ID, ConstraintSet.TOP   , 0);
-            constraintSet.connect(button.getId(), ConstraintSet.LEFT  , ConstraintSet.PARENT_ID, ConstraintSet.LEFT  , 0);
-            constraintSet.connect(button.getId(), ConstraintSet.RIGHT , ConstraintSet.PARENT_ID, ConstraintSet.RIGHT , 0);
-            constraintSet.connect(button.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-//            constraintSet.constrainDefaultWidth(button.getId(), ConstraintSet.MATCH_CONSTRAINT_WRAP);
-            constraintSet.setHorizontalBias(button.getId(), random(0, 100)/100f);
-
-//            constraintSet.constrainHeight(button.getId(), ConstraintSet.MATCH_CONSTRAINT_WRAP);
-//            constraintSet.constrainWidth(button.getId(), ConstraintSet.MATCH_CONSTRAINT_WRAP);
-
-            constraintSet.applyTo(GlobalVariables.constraintLayout_score);
-
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT);
-//            button.setLayoutParams(params);
-            */
-
-
-
             GameActivity.score++;
 
-
-
-
-//            globalVariables.getLinearLayout_score().removeViews(0, globalVariables.getLinearLayout_score().getChildCount() - 1);
             globalVariables.getLinearLayout_score().removeAllViews();
-//            ConstraintSet constraintSet = new ConstraintSet();
-
-//            LinearLayout.LayoutParams lp =
-//                    new LinearLayout.LayoutParams(
-//                            LinearLayout.LayoutParams.WRAP_CONTENT,
-//                            LinearLayout.LayoutParams.WRAP_CONTENT);
-
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1f);
             lp.setMargins(8,8,8,8);
 
 
-//            constraintSet.clone(GlobalVariables.constraintLayout_score);
             for (int i = 0; i < GameActivity.score; i++){
                 ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
                 _imageView.setId(View.generateViewId());
                 _imageView.setImageResource(R.drawable.plastic);
-//                _imageView.getLayoutParams().width = 32;
-//                _imageView.getLayoutParams().height = 32;
-//                _imageView.setMinimumWidth(32);
-//                _imageView.setMaxWidth(32);
-//                _imageView.setScaleX(0.2f);
-//                _imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 _imageView.setLayoutParams(lp);
                 globalVariables.getLinearLayout_score().addView( _imageView, 0);
-
-//                Log.d(TAG, MessageFormat.format(
-//                        "amount: {0} | score: {1}| bias: {2} "
-//                        , globalVariables.getLinearLayout_score().getChildCount(), score, 0));
-
-
-
-
-
-
-
-//                Button _imageView = new Button(GlobalVariables.mainActivity);
-//                _imageView.setId(View.generateViewId());
-//                _imageView.setText("hello wrold");
-//                _imageView.setLayoutParams(lp);
-//                GlobalVariables.constraintLayout_score.addView(_imageView);
-
-
-
-//            constraintSet.setVerticalBias  (imageView.getId(), y/(gridSize - 1));
-//                float bias = 0.5f * i;
-//
-//                constraintSet.clone(GlobalVariables.constraintLayout_score);
-//                constraintSet.setHorizontalBias(_imageView.getId(), 0);
-//                constraintSet.connect(_imageView.getId(), ConstraintSet.TOP   , ConstraintSet.PARENT_ID, ConstraintSet.TOP   , 0);
-//                constraintSet.connect(_imageView.getId(), ConstraintSet.LEFT  , ConstraintSet.PARENT_ID, ConstraintSet.LEFT  , 0);
-//                constraintSet.connect(_imageView.getId(), ConstraintSet.RIGHT , ConstraintSet.PARENT_ID, ConstraintSet.RIGHT , 0);
-//                constraintSet.connect(_imageView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
-//
-//                constraintSet.applyTo(GlobalVariables.constraintLayout_score);
-
-
-//                ConstraintLayout.LayoutParams textParam = new ConstraintLayout.LayoutParams
-//                        (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-
-
-//                LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
-//                        (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-
-//                _imageView.setLayoutParams(textParam);
             }
-
-
-
-
-
 
         } else if ((int) imageView.getTag() == R.drawable.nemo){
             GameActivity.decreesGameTime();
         }
+
         imageView.setAlpha(1f);
         imageView.startAnimation(clickAnimation());
     }
