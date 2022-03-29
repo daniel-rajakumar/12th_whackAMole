@@ -183,7 +183,7 @@ public class Entities {
 //                            LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT, 1f);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1f);
             lp.setMargins(8,8,8,8);
 
 
