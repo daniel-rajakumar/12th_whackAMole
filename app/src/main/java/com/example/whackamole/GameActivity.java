@@ -47,11 +47,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-        StrictMode.setThreadPolicy(policy);
-
         run();
     }
 
@@ -65,7 +60,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         GlobalVariables.mainActivity.runOnUiThread(() -> {
-                            for (int i = 0; i < random(0, 4); i++){
+                            for (int i = 0; i < random(1, 4); i++){
                                 if (Entities.isSpaceAvailable()){
                                     int x, y;
                                     do {

@@ -229,7 +229,7 @@ public class Entities {
     }
 
     int getRandomImage(){
-        if (random(0, 4) == 0) {
+        if (random(0, 3) == 0) {
             return R.drawable.nemo;
         }
         return R.drawable.plastic;
