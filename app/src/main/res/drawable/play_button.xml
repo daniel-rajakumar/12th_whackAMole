@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-android:shape="rectangle"  >
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:state_pressed="true"
+    android:state_enabled="true"
+    android:drawable="@drawable/play_button_pressed" />
 
-
-
-<corners android:radius="25dp"/>
-
-<solid android:color="@color/wood_alt"/>
-
-
-</shape>
+    <item
+        android:state_enabled="true"
+        android:drawable="@drawable/play_button_enabled" />
+</selector>

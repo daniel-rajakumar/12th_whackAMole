@@ -141,14 +141,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/play_button"
-            android:textColor="@color/wood"
             android:padding="20dp"
             android:text="PLAY"
-            android:textSize="96sp"
+            android:textColor="@color/wood"
+            android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.22000003" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Goal: collect as much plastic as you can!
+\n Collecting plastic: +1 points
+\n Collecting fish: -5 second
+\n Time: 60 seconds.
+                "
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_play"
+            app:layout_constraintVertical_bias="0.18" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
