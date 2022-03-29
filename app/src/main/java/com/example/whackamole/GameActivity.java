@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.WindowManager;
+import  java.util.*;
 
 import com.bumptech.glide.Glide;
 
@@ -15,6 +16,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "networking";
     GlobalVariables globalVariables;
+    static int time_second = 60;
 
 
     void run(){
@@ -25,15 +27,11 @@ public class GameActivity extends AppCompatActivity {
         setUpBackground();
         Entities.gridSize = 3;
 
-//        for (int x = 0; x < Entities.gridSize; x++){
-//            for (int y = 0; y < Entities.gridSize; y++) {
-//                new Entities(x, y);
-//            }
-//        }
-
         Entities.isAvailable = new boolean[(int) Entities.gridSize][(int) Entities.gridSize];
 
-        new java.util.Timer().schedule(
+        startTimer();
+
+        new Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
@@ -70,6 +68,19 @@ public class GameActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.background_water).into(globalVariables.getImageView_background());
     }
 
+    static void decreesGameTime(){
+        time_second -= 5;
+    }
+
+
+    void startTimer(){
+        new Timer().schedule(new TimerTask(){
+            @Override
+            public void run() {
+                globalVariables.getTextView_timer().setText("Timer: " + --time_second);
+            }
+        },0, 1000);
+    }
 
 
     public int random(int from, int to){

@@ -59,7 +59,6 @@ public class Entities {
         isAvailable[x][y] = true;
 
         int image = getRandomImage();
-        image = R.drawable.plastic;
         imageView.setImageResource(image);
         imageView.setTag(image);
         imageView.setAlpha(objectFloatingDepth);
@@ -247,6 +246,8 @@ public class Entities {
 
 
 
+        } else if ((int) imageView.getTag() == R.drawable.nemo){
+            GameActivity.decreesGameTime();
         }
         imageView.setAlpha(1f);
         imageView.startAnimation(clickAnimation());
