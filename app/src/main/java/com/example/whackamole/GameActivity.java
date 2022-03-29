@@ -19,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "networking";
     GlobalVariables globalVariables;
-    static int time_second = 30;
+    static int time_second = 60;
     static int score;
 
 
@@ -44,14 +44,17 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         GlobalVariables.mainActivity.runOnUiThread(() -> {
-                            if (Entities.isSpaceAvailable()){
-                                int x, y;
-                                do {
-                                    x = random(0, 2);
-                                    y = random(0, 2);
-                                } while (Entities.isAvailable(x, y));
+                            for (int i = 0; i < random(0, 4); i++){
+                                if (Entities.isSpaceAvailable()){
+                                    int x, y;
+                                    do {
+                                        x = random(0, 2);
+                                        y = random(0, 2);
+                                    } while (Entities.isAvailable(x, y));
 
-                                new Entities(x, y, 2000);
+                                    new Entities(x, y, random(500, 2500));
+                                }
+
                             }
                         });
                     }

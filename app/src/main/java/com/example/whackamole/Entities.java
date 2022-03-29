@@ -348,11 +348,10 @@ public class Entities {
     }
 
     int getRandomImage(){
-        switch (random(0, 1)){
-            case 0: return R.drawable.nemo;
-            case 1: return R.drawable.plastic;
-            default: return -1;
+        if (random(0, 4) == 0) {
+            return R.drawable.nemo;
         }
+        return R.drawable.plastic;
     }
 
 
@@ -369,7 +368,6 @@ public class Entities {
         }
 
         return false;
-
     }
 
     public int random(int from, int to){

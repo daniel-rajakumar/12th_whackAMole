@@ -160,7 +160,7 @@
 \n Collecting plastic: +1 points
 \n Collecting fish: -5 second
 \n Time: 60 seconds.
-                "
+\n GAME CONTAINS SOUND!"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

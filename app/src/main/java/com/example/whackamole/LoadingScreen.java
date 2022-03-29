@@ -18,6 +18,6 @@ public class LoadingScreen extends AppCompatActivity {
             startActivity(new Intent(this, MenuScreen.class));
 //            startActivity(new Intent(this, GameActivity.class));
             finish();
-        }, 300);
+        }, 2000);
     }
 }
