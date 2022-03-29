@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
 import  java.util.*;
 
 import com.bumptech.glide.Glide;
@@ -16,7 +18,8 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "networking";
     GlobalVariables globalVariables;
-    static int time_second = 60;
+    static int time_second = 15;
+    static int score;
 
 
     void run(){
@@ -24,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
         globalVariables.setValues(this);
 
         GlobalVariables.makeStatusBarTransparent(this);
-        setUpBackground();
+        Glide.with(this).load(R.drawable.background_water).into((ImageView) findViewById(R.id.imageView_background));
         Entities.gridSize = 3;
 
         Entities.isAvailable = new boolean[(int) Entities.gridSize][(int) Entities.gridSize];
@@ -78,6 +81,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 globalVariables.getTextView_timer().setText("Timer: " + --time_second);
+                if (time_second <= 0){
+                    finish();
+                    startActivity(new Intent(GlobalVariables.mainActivity, Result_Activity.class));
+                    cancel();
+                }
             }
         },0, 1000);
     }

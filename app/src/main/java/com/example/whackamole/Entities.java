@@ -40,7 +40,6 @@ public class Entities {
     float objectFloatingDepth = 0.60f;
     boolean isAnimating = false, isSelected;
     GlobalVariables globalVariables;
-    static int score;
     ImageView imageView;
 
     static boolean[][] isAvailable = new boolean[(int) gridSize][(int) gridSize];
@@ -167,7 +166,7 @@ public class Entities {
 
 
 
-            score++;
+            GameActivity.score++;
 
 
 
@@ -187,7 +186,7 @@ public class Entities {
 
 
 //            constraintSet.clone(GlobalVariables.constraintLayout_score);
-            for (int i = 0; i < score; i++){
+            for (int i = 0; i < GameActivity.score; i++){
                 ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
                 _imageView.setId(View.generateViewId());
                 _imageView.setImageResource(R.drawable.plastic);
@@ -200,9 +199,9 @@ public class Entities {
                 _imageView.setLayoutParams(lp);
                 globalVariables.getLinearLayout_score().addView( _imageView, 0);
 
-                Log.d(TAG, MessageFormat.format(
-                        "amount: {0} | score: {1}| bias: {2} "
-                        , globalVariables.getLinearLayout_score().getChildCount(), score, 0));
+//                Log.d(TAG, MessageFormat.format(
+//                        "amount: {0} | score: {1}| bias: {2} "
+//                        , globalVariables.getLinearLayout_score().getChildCount(), score, 0));
 
 
 

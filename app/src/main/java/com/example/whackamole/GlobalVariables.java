@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+
 public class GlobalVariables extends Application {
 
     static GameActivity mainActivity;
@@ -58,5 +60,6 @@ public class GlobalVariables extends Application {
         activity.getWindow().setAttributes(winParams);
         activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
+
 
 }
