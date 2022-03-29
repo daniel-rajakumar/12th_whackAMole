@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:id="@+id/mainLayout"
-tools:context=".MainActivity">
+tools:context=".GameActivity">
 
 <ImageView
     android:id="@+id/imageView_background"
@@ -46,7 +46,6 @@ tools:context=".MainActivity">
     android:id="@+id/constrainLayout_timer"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:background="#D11919"
     app:layout_constraintBottom_toTopOf="@+id/guideline_timer_bottom"
     app:layout_constraintEnd_toStartOf="@+id/guideline_timer_right"
     app:layout_constraintStart_toStartOf="@+id/guideline_timer_left"
@@ -57,14 +56,16 @@ tools:context=".MainActivity">
         android:id="@+id/textView_timer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/wooden_background"
         android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:text="timer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -129,21 +130,21 @@ tools:context=".MainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.86" />
+        app:layout_constraintGuide_percent="0.82" />
 
-<androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_fishermen_bottom"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.74" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_fishermen_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
 
-<androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_fishermen_top"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.26" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_fishermen_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
 
 <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline_fishermen_left"
@@ -192,7 +193,7 @@ tools:context=".MainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.88" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_timer_bottom"
@@ -201,19 +202,19 @@ tools:context=".MainActivity">
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.98" />
 
-<androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_timer_right"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_timer_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
-<androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_timer_left"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_percent="0.77" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_timer_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_score_top"
@@ -227,7 +228,7 @@ tools:context=".MainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.86" />
+        app:layout_constraintGuide_percent="0.82" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_score_right"
