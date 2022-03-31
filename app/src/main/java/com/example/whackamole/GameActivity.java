@@ -20,10 +20,11 @@ public class GameActivity extends AppCompatActivity {
     GlobalVariables globalVariables;
     static int time_second;
     static int score;
+    Timer timer_pop;
 
 
     void run(){
-        time_second = 5;
+        time_second = 30;
 
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);
@@ -58,12 +59,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     void popEntitiesAtRandomPlaces(){
-        new Timer().schedule(
+        timer_pop = new Timer();
+        timer_pop.schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
                         GlobalVariables.mainActivity.runOnUiThread(() -> {
-                            for (int i = 0; i < random(1, 4); i++){
+                            for (int i = 0; i < random(1, 1); i++){
                                 if (Entities.isSpaceAvailable()){
                                     int x, y;
                                     do {
@@ -87,6 +89,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 globalVariables.getTextView_timer().setText("Timer: " + --time_second);
                 if (time_second <= 0){
+                    timer_pop.cancel();
                     finish();
                     startActivity(new Intent(GlobalVariables.mainActivity, Result_Activity.class));
                     cancel();
