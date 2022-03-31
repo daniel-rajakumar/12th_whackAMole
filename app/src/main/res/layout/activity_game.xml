@@ -73,35 +73,12 @@ tools:context=".GameActivity">
         android:id="@+id/constrainLayout_score"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#ff0000"
-        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline_score_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guideline_score_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_score_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_score_top">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout_score"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:foregroundGravity="left"
-        android:gravity="start"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_score_bottom"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_score_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_score_left"
-
-        app:layout_constraintTop_toTopOf="@+id/guideline_score_top">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline_platform_left"

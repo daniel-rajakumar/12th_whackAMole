@@ -19,10 +19,8 @@ import com.bumptech.glide.Glide;
 public class GlobalVariables extends Application {
 
     static GameActivity mainActivity;
-    private ImageView imageView_background;
     static ConstraintLayout constraintLayout, constraintLayout_score;
     private TextView textView_timer;
-    private LinearLayout linearLayout_score;
 
     static MediaPlayer mediaPlayer_background, mediaPlayer_victory, mediaPlayer_menu;
 
@@ -30,21 +28,14 @@ public class GlobalVariables extends Application {
 
     public void setValues(GameActivity mainActivity){
         GlobalVariables.mainActivity = mainActivity;
-        imageView_background = mainActivity.findViewById(R.id.imageView_background);
         constraintLayout = mainActivity.findViewById(R.id.mainLayout);
         textView_timer = mainActivity.findViewById(R.id.textView_timer);
-        linearLayout_score = mainActivity.findViewById(R.id.linearLayout_score);
         constraintLayout_score = mainActivity.findViewById(R.id.constrainLayout_score);
     }
 
 
     public TextView getTextView_timer() {
         return textView_timer;
-    }
-
-
-    public LinearLayout getLinearLayout_score() {
-        return linearLayout_score;
     }
 
 
