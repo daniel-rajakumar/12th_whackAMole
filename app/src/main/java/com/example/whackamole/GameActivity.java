@@ -18,15 +18,18 @@ import com.bumptech.glide.Glide;
 public class GameActivity extends AppCompatActivity {
 
     GlobalVariables globalVariables;
-    static int time_second = 60;
+    static int time_second;
     static int score;
 
 
     void run(){
+        time_second = 5;
+
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);
 
         // start music
+        GlobalVariables.mediaPlayer_background = MediaPlayer.create(this, R.raw.background);
         GlobalVariables.mediaPlayer_background.start();
         GlobalVariables.muteMediaPlayer(GlobalVariables.mediaPlayer_background, GlobalVariables.mediaMute);
 

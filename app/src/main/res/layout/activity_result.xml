@@ -49,26 +49,70 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/wooden_background"
         android:alpha="0.9"
+        android:background="@drawable/wooden_background"
         app:layout_constraintBottom_toTopOf="@+id/guideline_right"
         app:layout_constraintEnd_toStartOf="@+id/guideline_top"
         app:layout_constraintStart_toStartOf="@+id/guideline_bottom"
         app:layout_constraintTop_toTopOf="@+id/guideline_left">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MENU"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/wood"
+            android:background="@drawable/play_button"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_score" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXIT"
+            android:textColor="@color/wood"
+            android:background="@drawable/play_button"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_menu"
+            app:layout_constraintTop_toBottomOf="@+id/textView_score" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_playAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play Again"
+            android:textColor="@color/wood"
+            android:background="@drawable/play_button"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_menu"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_score" />
+
         <TextView
             android:id="@+id/textView_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:background="@drawable/play_button"
-            android:textColor="@color/wood"
-            android:textSize="50dp"
             android:padding="10dp"
+            android:text="Score"
+            android:textColor="@color/wood"
+            android:background="@drawable/play_button"
+            android:textSize="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -43,6 +43,10 @@ public class MenuScreen extends AppCompatActivity {
             GlobalVariables.muteMediaPlayer(GlobalVariables.mediaPlayer_menu, GlobalVariables.mediaMute);
         });
 
+        button_exit.setOnClickListener(v -> {
+            GlobalVariables.mediaPlayer_menu.stop();
+            finishAndRemoveTask();
+        });
         setUpMusics();
 
         GlobalVariables.mediaPlayer_menu.start();
@@ -50,8 +54,6 @@ public class MenuScreen extends AppCompatActivity {
 
     void setUpMusics(){
         GlobalVariables.mediaPlayer_menu = MediaPlayer.create(this, R.raw.menu);
-        GlobalVariables.mediaPlayer_victory = MediaPlayer.create(this, R.raw.victory);
-        GlobalVariables.mediaPlayer_background = MediaPlayer.create(this, R.raw.background);
     }
 
     void muteMedias(boolean mute){
