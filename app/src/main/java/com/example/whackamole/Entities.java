@@ -138,15 +138,6 @@ public class Entities {
 
             constraintSet.applyTo(GlobalVariables.constraintLayout_score);
 
-
-//            ConstraintLayout.LayoutParams textParam = new ConstraintLayout.LayoutParams
-//                    (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-
-
-//                LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
-//                        (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-
-//            _imageView.setLayoutParams(textParam);
         }
 
         } else if ((int) imageView.getTag() == R.drawable.nemo){
