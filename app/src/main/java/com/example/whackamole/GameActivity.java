@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
 
 
     void run(){
-        time_second = 30;
+        time_second = 300;
 
         globalVariables = (GlobalVariables) getApplication();
         globalVariables.setValues(this);

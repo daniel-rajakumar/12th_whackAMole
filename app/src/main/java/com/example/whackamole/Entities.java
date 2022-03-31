@@ -108,21 +108,102 @@ public class Entities {
         if (isAnimating) return;
         isSelected = true;
         isAnimating = true;
-        if ((int) imageView.getTag() == R.drawable.plastic){
+        if ((int) imageView.getTag() == R.drawable.plastic) {
             GameActivity.score.getAndIncrement();
 
-            globalVariables.getLinearLayout_score().removeAllViews();
+//            globalVariables.getLinearLayout_score().removeAllViews();
+            GlobalVariables.constraintLayout_score.removeAllViews();
+//
+////            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1f);
+//            ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, 0);
+//            lp.setMargins(8,8,8,8);
+//
+            Log.d("daniel", "~~~~~~~~~~~~");
+            int n  = GameActivity.score.get();
+            for (int i = 0; i < n; i++){
+//                ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
+//                _imageView.setId(View.generateViewId());
+//                _imageView.setImageResource(R.drawable.plastic);
+////                _imageView.setLayoutParams(lp);
+//
+//
+//                GlobalVariables.constraintLayout_score.addView(_imageView);
+//
+//
+//                ConstraintSet constraintSet = new ConstraintSet();
+//                float bias = 0.5f * i;
+//
+//                constraintSet.clone(GlobalVariables.constraintLayout_score);
+//                constraintSet.connect(_imageView.getId(), ConstraintSet.TOP   , ConstraintSet.PARENT_ID, ConstraintSet.TOP   , 0);
+//                constraintSet.connect(_imageView.getId(), ConstraintSet.LEFT  , ConstraintSet.PARENT_ID, ConstraintSet.LEFT  , 0);
+//                constraintSet.connect(_imageView.getId(), ConstraintSet.RIGHT , ConstraintSet.PARENT_ID, ConstraintSet.RIGHT , 0);
+//                constraintSet.connect(_imageView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+//                constraintSet.setVerticalBias(_imageView.getId(), 0.2f);
+//                constraintSet.setHorizontalBias(_imageView.getId(), 0);
+//
+//                constraintSet.applyTo(GlobalVariables.constraintLayout_score);
+//
+//
+////                ConstraintLayout.LayoutParams textParam = new ConstraintLayout.LayoutParams
+////                        (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//
+////
+////                LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
+////                        (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+////
+////                _imageView.setLayoutParams(textParam);
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1f);
-            lp.setMargins(8,8,8,8);
 
-            for (int i = 0; i < GameActivity.score.get(); i++){
-                ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
-                _imageView.setId(View.generateViewId());
-                _imageView.setImageResource(R.drawable.plastic);
-                _imageView.setLayoutParams(lp);
-                globalVariables.getLinearLayout_score().addView( _imageView, 0);
-            }
+//                ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
+//                _imageView.setId(View.generateViewId());
+//                _imageView.setImageResource(R.drawable.plastic);
+////                _imageView.setLayoutParams(lp);
+//                _imageView.setLayoutParams(lp);
+
+//            Button _imageView = new Button(GlobalVariables.mainActivity);
+//            _imageView.setId(View.generateViewId());
+//            _imageView.setText("hello wrold");
+
+
+
+            ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(0, 150);
+
+            ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
+            _imageView.setId(View.generateViewId());
+            _imageView.setImageResource(R.drawable.plastic);
+            _imageView.setLayoutParams(lp);
+
+            GlobalVariables.constraintLayout_score.addView(_imageView);
+
+            ConstraintSet constraintSet = new ConstraintSet();
+
+
+//            constraintSet.setVerticalBias(imageView.getId(), y / (gridSize - 1));
+//                float bias = 0.5f * i;
+
+            float val = ((100f / (n + 1)) * (i + 1)) / 100f;
+            Log.d("daniel", MessageFormat.format("{0} -> {1}%", i, val));
+            constraintSet.clone(GlobalVariables.constraintLayout_score);
+            constraintSet.setHorizontalBias(_imageView.getId(), 0);
+            constraintSet.setVerticalBias(_imageView.getId(), val);
+            constraintSet.connect(_imageView.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+            constraintSet.connect(_imageView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+            constraintSet.connect(_imageView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
+            constraintSet.connect(_imageView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
+
+
+            constraintSet.applyTo(GlobalVariables.constraintLayout_score);
+
+
+//            ConstraintLayout.LayoutParams textParam = new ConstraintLayout.LayoutParams
+//                    (ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+
+
+//                LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
+//                        (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+
+//            _imageView.setLayoutParams(textParam);
+        }
 
         } else if ((int) imageView.getTag() == R.drawable.nemo){
             GameActivity.decreesGameTime();

@@ -31,7 +31,8 @@ public class LoadingScreen extends AppCompatActivity {
         GlobalVariables.makeStatusBarTransparent(this);
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
-        alphaAnimation.setDuration(4000);
+//        alphaAnimation.setDuration(4000);
+        alphaAnimation.setDuration(40);
 
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
