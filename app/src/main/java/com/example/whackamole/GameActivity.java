@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         GlobalVariables.mainActivity.runOnUiThread(() -> {
-                            for (int i = 0; i < random(1, 1); i++){
+                            for (int i = 0; i < random(1, 4); i++){
                                 if (Entities.isSpaceAvailable()){
                                     int x, y;
                                     do {
