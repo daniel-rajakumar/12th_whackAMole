@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
 import  java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.bumptech.glide.Glide;
 
@@ -19,7 +21,7 @@ public class GameActivity extends AppCompatActivity {
 
     GlobalVariables globalVariables;
     static int time_second;
-    static int score;
+    static AtomicInteger score = new AtomicInteger();
     Timer timer_pop;
 
 

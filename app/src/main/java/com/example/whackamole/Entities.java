@@ -109,7 +109,7 @@ public class Entities {
         isSelected = true;
         isAnimating = true;
         if ((int) imageView.getTag() == R.drawable.plastic){
-            GameActivity.score++;
+            GameActivity.score.getAndIncrement();
 
             globalVariables.getLinearLayout_score().removeAllViews();
 
@@ -117,7 +117,7 @@ public class Entities {
             lp.setMargins(8,8,8,8);
 
 
-            for (int i = 0; i < GameActivity.score; i++){
+            for (int i = 0; i < GameActivity.score.get(); i++){
                 ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
                 _imageView.setId(View.generateViewId());
                 _imageView.setImageResource(R.drawable.plastic);
