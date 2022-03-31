@@ -116,7 +116,6 @@ public class Entities {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0, 1f);
             lp.setMargins(8,8,8,8);
 
-
             for (int i = 0; i < GameActivity.score.get(); i++){
                 ImageView _imageView = new ImageView(GlobalVariables.mainActivity);
                 _imageView.setId(View.generateViewId());
