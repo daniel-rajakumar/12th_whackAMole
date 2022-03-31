@@ -137,6 +137,34 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_left">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/play_button"
+            android:text="MUTE"
+            android:textColor="@color/wood"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button_play"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/play_button"
+            android:text="EXIT"
+            android:textColor="@color/wood"
+            app:layout_constraintBottom_toBottomOf="@+id/button_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,6 +175,7 @@
             android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.22000003" />

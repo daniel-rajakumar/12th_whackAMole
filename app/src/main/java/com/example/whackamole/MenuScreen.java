@@ -19,15 +19,42 @@ public class MenuScreen extends AppCompatActivity {
         GlobalVariables.makeStatusBarTransparent(this);
         Glide.with(this).load(R.drawable.background_water).into((ImageView) findViewById(R.id.imageView_background));
 
-        Button button = findViewById(R.id.button_play);
+        Button  button_play = findViewById(R.id.button_play),
+                button_exit = findViewById(R.id.button_exit),
+                button_mute = findViewById(R.id.button_mute);
 
-        button.setOnClickListener(v -> {
+
+        button_play.setOnClickListener(v -> {
             GlobalVariables.mediaPlayer_menu.stop();
             finish();
             startActivity(new Intent(this, GameActivity.class));
         });
 
-        GlobalVariables.mediaPlayer_menu = MediaPlayer.create(this, R.raw.menu);
+        button_mute.setOnClickListener(v -> {
+            Button button = (Button) v;
+            if (button.getText().toString().equalsIgnoreCase("MUTE")){
+                muteMedias(true);
+                button.setText("UNMUTE");
+            } else if (button.getText().toString().equalsIgnoreCase("UNMUTE")) {
+                muteMedias(false);
+                button.setText("MUTE");
+            }
+
+            GlobalVariables.muteMediaPlayer(GlobalVariables.mediaPlayer_menu, GlobalVariables.mediaMute);
+        });
+
+        setUpMusics();
+
         GlobalVariables.mediaPlayer_menu.start();
+    }
+
+    void setUpMusics(){
+        GlobalVariables.mediaPlayer_menu = MediaPlayer.create(this, R.raw.menu);
+        GlobalVariables.mediaPlayer_victory = MediaPlayer.create(this, R.raw.victory);
+        GlobalVariables.mediaPlayer_background = MediaPlayer.create(this, R.raw.background);
+    }
+
+    void muteMedias(boolean mute){
+        GlobalVariables.mediaMute = mute;
     }
 }

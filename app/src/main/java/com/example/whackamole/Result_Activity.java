@@ -23,9 +23,9 @@ public class Result_Activity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView_score);
         textView.setText("Score: " + GameActivity.score);
 
-        GlobalVariables.mediaPlayer_victory = MediaPlayer.create(this, R.raw.victory);
         GlobalVariables.mediaPlayer_background.stop();
         GlobalVariables.mediaPlayer_victory.start();
+        GlobalVariables.muteMediaPlayer(GlobalVariables.mediaPlayer_victory, GlobalVariables.mediaMute);
     }
 
 }

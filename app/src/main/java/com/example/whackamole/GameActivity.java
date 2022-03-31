@@ -27,8 +27,8 @@ public class GameActivity extends AppCompatActivity {
         globalVariables.setValues(this);
 
         // start music
-        GlobalVariables.mediaPlayer_background = MediaPlayer.create(this, R.raw.background);
         GlobalVariables.mediaPlayer_background.start();
+        GlobalVariables.muteMediaPlayer(GlobalVariables.mediaPlayer_background, GlobalVariables.mediaMute);
 
         GlobalVariables.makeStatusBarTransparent(this);
 

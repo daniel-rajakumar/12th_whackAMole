@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,8 @@ public class GlobalVariables extends Application {
     private LinearLayout linearLayout_score;
 
     static MediaPlayer mediaPlayer_background, mediaPlayer_victory, mediaPlayer_menu;
+
+    static boolean mediaMute = false;
 
     public void setValues(GameActivity mainActivity){
         GlobalVariables.mainActivity = mainActivity;
@@ -51,6 +54,14 @@ public class GlobalVariables extends Application {
         winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
         activity.getWindow().setAttributes(winParams);
         activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    public static void muteMediaPlayer(MediaPlayer player, boolean mute){
+        if (mute){
+            player.setVolume(0f, 0f);
+        } else {
+            player.setVolume(1f, 1f);
+        }
     }
 
 
